@@ -1,0 +1,73 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container-carousel {
+    position: relative;
+    width: 100%; /* Cambiado a 100% para que sea responsive */
+    height: 90vh; /* Altura relativa al tamaño de la pantalla */
+    background-color: #e0e0e0;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.66);
+    overflow: hidden;
+    overflow-x: hidden; /* Evita el desplazamiento horizontal */
+}
+
+.carruseles {
+    width: 400%; /* Ancho establecido de nuevo a 400% */
+    height: 90vh;
+    display: flex;
+}
+
+.slider-section {
+    flex: 1; /* Cambiado para que se expanda igualmente */
+}
+
+.slider-section img {
+    width: 100%; /* Cambiado para que las imágenes sean responsive */
+    height: 100%; /* Ajustar la altura automáticamente según el ancho */
+    object-fit: cover;
+}
+
+.btn-left,
+.btn-right {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    font-size: 1.5rem;
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #ffffff81;
+    transform: translate(0,-50%);
+    transition: .5s ease;
+    user-select: none;
+}
+
+.btn-left:hover,
+.btn-right:hover {
+    background-color: #333333d4;
+    color: #fff;
+}
+
+.btn-left {
+    left: 10px;
+}
+
+.btn-right {
+    right: 10px;
+}
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+}

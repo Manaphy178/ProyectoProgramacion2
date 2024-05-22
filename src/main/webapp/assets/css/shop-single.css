@@ -1,0 +1,105 @@
+main{
+    min-height: 100vh;
+}
+main .product{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "productImg productInfo";
+    padding: 3rem;
+}
+main .product .productImages{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: end;
+    grid-area: productImg;
+}
+main .product .productImages img{
+    width: 70vh;
+    height: 70vh;
+    margin-right: 2rem;
+    border-radius: 3rem;
+}
+main .product .productInformation{
+    grid-area: productInfo;
+    width: 70%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(236, 236, 236);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+main .product .productInformation .productPrice{
+    margin-top: 1rem;
+}
+main .product .productInformation .productBrand{
+    margin-top: 2rem;
+    font-size: 1.3rem;
+}
+main .product .productInformation h4{
+    margin-top: 3rem;
+    font-size: 1.2rem;
+}
+main .product .productInformation .especifications{
+    display: flex;
+    flex-direction: column;
+}
+main .product .productInformation .especifications p{
+    margin: 0.2rem;
+}
+
+.buttons{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    gap: 2rem;
+}
+.shopButton {
+    width: 30%;
+    appearance: none;
+    background-color: transparent;
+    border: 0.125em solid #1A1A1A;
+    border-radius: 0.9375em;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 3.75em;
+    min-width: 0;
+    outline: none;
+    padding: 1em 2.3em;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    will-change: transform;
+   }
+
+   .shopButton:disabled {
+    pointer-events: none;
+   }
+   
+   .shopButton:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+   }
+   
+   .shopButton:active {
+    box-shadow: none;
+    transform: translateY(0);
+   }
+
+

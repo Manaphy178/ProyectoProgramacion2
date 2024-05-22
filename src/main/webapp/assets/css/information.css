@@ -1,0 +1,44 @@
+.information{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.information .informationImg{
+    max-width: 40rem;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.information .informationImg img{
+    width: 100%;
+    height: 100%;
+    margin: 2rem;
+}
+.information .informationText{
+    max-width: 40rem;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+.information .informationText h2{
+    text-align: center;
+}
+.information .informationText p{
+    text-align: center;
+}
+@media (min-width: 768px) {
+}
+  
+@media (min-width: 992px) {
+
+}
+@media (min-width: 1200px) {
+
+}
