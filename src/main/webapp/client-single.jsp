@@ -83,11 +83,11 @@
               </tr>
               <%for (Sale s : bd.saleClient(c.getIdCliente())){ %>
               <tr>
-                  <td><%=s.getIdSales()%></td>
-                  <td><%=c.getUsername()%></td>
-                  <td><%=s.getSaleDate()%></td>
-                  <td><%=bd.unitsSale(s.getIdSales())%></td>
-                  <td><%=s.getTotal()%></td>
+                  <td><a style="text-decoration: none; color: black;" href="sell-line-single.jsp?codSale=<%=s.getIdSales()%>"><%=s.getIdSales()%></a></td>
+                  <td><a style="text-decoration: none; color: black;" href="sell-line-single.jsp?codSale=<%=s.getIdSales()%>"><%=c.getUsername()%></a></td>
+                  <td><a style="text-decoration: none; color: black;" href="sell-line-single.jsp?codSale=<%=s.getIdSales()%>"><%=s.getSaleDate()%></a></td>
+                  <td><a style="text-decoration: none; color: black;" href="sell-line-single.jsp?codSale=<%=s.getIdSales()%>"><%=bd.unitsSale(s.getIdSales())%></a></td>
+                  <td><a style="text-decoration: none; color: black;" href="sell-line-single.jsp?codSale=<%=s.getIdSales()%>"><%=s.getTotal()%></a></td>
               </tr>
               <%} %>
           </table>

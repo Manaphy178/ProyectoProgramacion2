@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="java.util.*" %>
+     <%@ page import="java.util.*" %>
     <%@ page import="pcSlots.*" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,15 +12,15 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script defer src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script defer src="./assets/js/categories.js"></script>
-    <link rel="stylesheet" href="./assets/css/shop.css">
-    <link rel="stylesheet" href="./assets/css/productCard.css">
-    <title>Products shop</title>
+    <link rel="stylesheet" href="./assets/css/tables.css">
+    <title>Sales line</title>
 </head>
-<% BDController bd = new BDController();
-ArrayList<Product> cart = bd.allCart();
-ArrayList<Product> pro = bd.allProduct();%>
 <body>
+	<%BDController bd = new BDController();
+	ArrayList<Product> cart = bd.allCart();
+	int codSale = Integer.parseInt(request.getParameter("codSale"));
+ArrayList<SaleLine> sl = bd.saleLineSale(codSale);
+	%>
 	<header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
     <div class="userThings">
@@ -42,49 +42,28 @@ ArrayList<Product> pro = bd.allProduct();%>
       </li>
     </ul>
   </header>
-      <aside class="aside">
-        <div class="asideContent">
-            <h2>Categories</h2>
-            <ul class="categories">
-              <li><input style="display: none;" type="radio" name="catergory" id="all">
-              <label style="width: 100%; text-align: start; margin-left: 1rem;" for="all"> All</label></li>
-            <%ArrayList<String> s = new ArrayList<String>();
-    		
-    		for(Product p : pro){%>
-    			<%if (!s.contains(p.getType())){ 
-    			s.add(p.getType());%>
-               	 <li><input style="display: none;" type="radio" name="catergory" id="<%=p.getType() %>">
-                  <label style="width: 100%; text-align: start; margin-left: 1rem;"  for="<%=p.getType() %>"> <%=p.getType() %></label></li>
-            	 <%} %>   
-             <%} %>
-            </ul>
-        </div>
-      </aside>
-      <main>
-        <section class="ShopContent">
-            <div class="topbar">
-                <h3>Products</h3>
-                <div class="sortBy">
-                  <h4>Sort by: </h4>
-                  <ul class="sortByList">
-                    <li><a href="#">Relevance</a></li>
-                    <li><a href="#">Price Low</a></li>
-                    <li><a href="#">Price High</a></li>
-                  </ul>
-                </div>
-            </div>
-            <div class="productContainer">
-            <% for (Product p : pro){ %>
-                <div class="productCard" id="<%=p.getType() %>cont">
-                    <img class="imagenProducto" src="./assets/img/products/<%=p.getIdProduct() %>.png" alt="">
-                    <p class="nombre"><%=p.getName() %></p>
-                    <h3 class="precio"><%=p.getValue() %>$</h3>
-                    <p class="envio">Envio gratis</p>
-                    <a href="./shop-single.jsp?codP=<%=p.getIdProduct() %>" style="width:100%"><button class="addCartButton">View product</button></a>
-                </div>
-                <%} %>
-            </div>
-        </section>
+     <main>
+        <h2 class="tableTittle">Sales line</h2>
+        <table border="1">
+            <tr>
+                <th>ID Line</th>
+                <th>ID Sale</th>
+                <th>Product</th>
+                <th>Units</th>
+                <th>Unit price</th>
+                <th>Total</th>
+            </tr>
+            <%for (SaleLine s : sl){ %>
+            <tr>
+                 <td><%=s.getIdLine()%></td>
+                  <td><%=s.getIdSale()%></td>
+                  <td><%=s.getProduct()%></td>
+                  <td><%=s.getUnits()%></td>
+                  <td><%=s.getUnit_price()%></td>
+                  <td><%=s.getUnit_price()*s.getUnits()%></td>
+            </tr>
+            <%} %>
+        </table>
       </main>
       <footer>
         <!-- Footer -->

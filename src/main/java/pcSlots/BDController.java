@@ -464,7 +464,26 @@ public class BDController {
 		}
 		return lines;
 	}
+	public ArrayList<SaleLine> saleLineSale(int idSale) {
+		ArrayList<SaleLine> lines = new ArrayList<>();
 
+		String sql = "SELECT * FROM sales_line WHERE idSales  = " + idSale;
+		Statement mySt;
+		try {
+			mySt = con.createStatement();
+			ResultSet rs = mySt.executeQuery(sql);
+			while (rs.next()) {
+				lines.add(new SaleLine(rs.getInt("idLines"), rs.getInt("idSales"), rs.getInt("product"),
+						rs.getInt("units"), rs.getFloat("unit_price")));
+			}
+			rs.close();
+			mySt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lines;
+	}
 	public ArrayList<SaleLine> saleLineProduct(int product) {
 		ArrayList<SaleLine> lines = new ArrayList<>();
 
