@@ -7,12 +7,14 @@ public class Product {
 	private String type;
 	private String description;
 	private String name;
+	private String caract;
 
 	public Product() {
 		super();
 	}
 
-	public Product(int idProduct, float value, String brand, String type, String description, String name) {
+	public Product(int idProduct, float value, String brand, String type, String description, String name,
+			String caract) {
 		super();
 		this.idProduct = idProduct;
 		this.value = value;
@@ -20,6 +22,7 @@ public class Product {
 		this.type = type;
 		this.description = description;
 		this.name = name;
+		this.caract = caract;
 	}
 
 	public int getIdProduct() {
@@ -69,4 +72,13 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getCaract() {
+		return caract;
+	}
+
+	public void setCaract(String caract) {
+		this.caract = caract;
+	}
+
 }

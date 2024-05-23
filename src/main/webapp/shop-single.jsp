@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="java.util.*" %>
+    <%@ page import="pcSlots.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,12 +16,16 @@
     <link rel="stylesheet" href="./assets/css/productCard.css">
     <title>View product</title>
 </head>
+<% BDController bd = new BDController();
+int codP = Integer.parseInt(request.getParameter("codP"));
+Product p = bd.giveProduct(codP);%>
 <body>
     <header class="header">
         <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
         <div class="userThings">
           <a href="" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-          <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""></a>
+               <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects">0</span></a>
+
         </div>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
@@ -34,31 +40,30 @@
         <article class="product">
             <section class="productImages">
                 <div>
-                  <img src="https://dummyimage.com/500x500" alt="">
+                  <img src="./assets/img/products/<%=p.getIdProduct() %>.png" alt="">
                 </div>
             </section>
             <section class="productInformation">
                 <article class="info">
-                    <h2 class="productName">Nombre producto</h2>
+                    <h2 class="productName"><%=p.getName() %></h2>
                     <h3 class="productPrice">
-                    99.99$
+                    <%=p.getValue() %>$
                     </h3>
                     <div class="productBrand">
-                    Brand: Marca
+                    Brand: <%=p.getBrand() %>
                     </div>
                     <div class="productDescription">
                       <h4>Description</h4>
                       <p class="description">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                     <%=p.getDescription() %>
                       </p>
                     </div>
                     <div class="especifications">
                         <h4>Especifications</h4>
-                        <p>Lorem ipsum dolor sit</p>
-                        <p>Lorem ipsum dolor sit</p>
-                        <p>Lorem ipsum dolor sit</p>
-                        <p>Lorem ipsum dolor sit</p>
-                        <p>Lorem ipsum dolor sit</p>
+                        <%for (String c : Util.espec(p.getCaract())){ %>
+                        <p><%=c %></p>
+                        <%} %>
+                    
                     </div>
                 </article>
                 <div class="buttons">

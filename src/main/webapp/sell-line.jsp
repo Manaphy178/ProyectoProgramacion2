@@ -15,18 +15,19 @@
 </head>
 <body>
     <header class="header">
-        <a href="./index.html" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
+        <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
         <div class="userThings">
           <a href="" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-          <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""></a>
+                <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects">0</span></a>
+
         </div>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
         <ul class="menu">
-          <li><a href="./shop.html">Products</a></li>
+          <li><a href="./shop.jsp">Products</a></li>
           <li><a href="#about">For gambling</a></li>
           <li><a href="#careers">Sells</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.jsp">Contact</a></li>
         </ul>
       </header>
       <main>

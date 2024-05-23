@@ -39,8 +39,9 @@ public class BDController {
 			mySt = con.createStatement();
 			ResultSet rs = mySt.executeQuery(sql);
 			while (rs.next()) {
-				clients.add(new Client(rs.getInt("idClient"), rs.getString("username"), rs.getString("password"),
-						rs.getString("name"), rs.getString("lastname"), rs.getInt("cp"), rs.getString("address")));
+				clients.add(new Client(rs.getInt("idClient"), rs.getString("dni"), rs.getString("username"),
+						rs.getString("name"), rs.getString("lastname"), rs.getString("province"), rs.getInt("cp"),
+						rs.getString("address")));
 			}
 			rs.close();
 			mySt.close();
@@ -71,25 +72,6 @@ public class BDController {
 		return cases;
 	}
 
-	public ArrayList<Login> allLogin() {
-		ArrayList<Login> logins = new ArrayList<>();
-		String sql = "SELECT * FROM login";
-		Statement mySt;
-		try {
-			mySt = con.createStatement();
-			ResultSet rs = mySt.executeQuery(sql);
-			while (rs.next()) {
-				logins.add(new Login(rs.getString("username"), rs.getString("password")));
-			}
-			rs.close();
-			mySt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return logins;
-	}
-
 	public ArrayList<Product> allProduct() {
 		ArrayList<Product> products = new ArrayList<>();
 		String sql = "SELECT * FROM products";
@@ -99,7 +81,8 @@ public class BDController {
 			ResultSet rs = mySt.executeQuery(sql);
 			while (rs.next()) {
 				products.add(new Product(rs.getInt("idProduct"), rs.getFloat("value"), rs.getString("brand"),
-						rs.getString("type"), rs.getString("description"), rs.getString("name")));
+						rs.getString("type"), rs.getString("description"), rs.getString("name"),
+						rs.getString("caract")));
 			}
 			rs.close();
 			mySt.close();
@@ -108,6 +91,28 @@ public class BDController {
 			e.printStackTrace();
 		}
 		return products;
+	}
+
+	public Product giveProduct(int cod) {
+		Product p = new Product();
+		String sql = "SELECT * FROM products WHERE idProduct = " + cod;
+		Statement mySt;
+		try {
+			mySt = con.createStatement();
+
+			ResultSet rs = mySt.executeQuery(sql);
+			while (rs.next()) {
+				p = new Product(rs.getInt("idProduct"), rs.getFloat("value"), rs.getString("brand"),
+						rs.getString("type"), rs.getString("description"), rs.getString("name"),
+						rs.getString("caract"));
+			}
+			rs.close();
+			mySt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return p;
 	}
 
 	public ArrayList<Sale> allSales() {

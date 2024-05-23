@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="java.util.*" %>
+    <%@ page import="pcSlots.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,12 +16,14 @@
     <link rel="stylesheet" href="./assets/css/productCard.css">
     <title>Products shop</title>
 </head>
+<% BDController bd = new BDController();%>
 <body>
     <header class="header">
         <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
         <div class="userThings">
           <a href="" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-          <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""></a>
+                <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects">0</span></a>
+
         </div>
         <input class="menu-btn" type="checkbox" id="menu-btn" />
         <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
@@ -52,48 +56,15 @@
                 </div>
             </div>
             <div class="productContainer">
+            <% for (Product p : bd.allProduct()){ %>
                 <div class="productCard">
-                    <img class="imagenProducto" src="https://dummyimage.com/150x150" alt="">
-                    <p class="nombre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet ex fringilla</p>
-                    <h3 class="precio">999€</h3>
+                    <img class="imagenProducto" src="./assets/img/products/<%=p.getIdProduct() %>.png" alt="">
+                    <p class="nombre"><%=p.getName() %></p>
+                    <h3 class="precio"><%=p.getValue() %>$</h3>
                     <p class="envio">Envio gratis</p>
-                    <button class="addCartButton">Add to cart</button>
+                    <a href="./shop-single.jsp?codP=<%=p.getIdProduct() %>" style="width:100%"><button class="addCartButton">Add to cart</button></a>
                 </div>
-                <div class="productCard">
-                  <img class="imagenProducto" src="https://dummyimage.com/150x150" alt="">
-                  <p class="nombre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet ex fringilla</p>
-                  <h3 class="precio">999€</h3>
-                  <p class="envio">Envio gratis</p>
-                  <button class="addCartButton">Add to cart</button>
-              </div>
-              <div class="productCard">
-                <img class="imagenProducto" src="https://dummyimage.com/150x150" alt="">
-                <p class="nombre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet ex fringilla</p>
-                <h3 class="precio">999€</h3>
-                <p class="envio">Envio gratis</p>
-                <button class="addCartButton">Add to cart</button>
-            </div>
-            <div class="productCard">
-              <img class="imagenProducto" src="https://dummyimage.com/150x150" alt="">
-              <p class="nombre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet ex fringilla</p>
-              <h3 class="precio">999€</h3>
-              <p class="envio">Envio gratis</p>
-              <button class="addCartButton">Add to cart</button>
-          </div>
-          <div class="productCard">
-            <img class="imagenProducto" src="https://dummyimage.com/150x150" alt="">
-            <p class="nombre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet ex fringilla</p>
-            <h3 class="precio">999€</h3>
-            <p class="envio">Envio gratis</p>
-            <button class="addCartButton">Add to cart</button>
-        </div>
-                        <div class="productCard">
-                    <img class="imagenProducto" src="https://dummyimage.com/150x150" alt="">
-                    <p class="nombre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet ex fringilla</p>
-                    <h3 class="precio">999€</h3>
-                    <p class="envio">Envio gratis</p>
-                    <button class="addCartButton">Add to cart</button>
-                </div>
+                <%} %>
             </div>
         </section>
       </main>
