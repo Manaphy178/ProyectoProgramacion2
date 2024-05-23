@@ -1,34 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="java.util.*" %>
+            <%@ page import="java.util.*" %>
     <%@ page import="pcSlots.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="shortcut icon" href="./assets/img/pcSlotsLogo.ico" type="image/x-icon">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script defer src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/shop-single.css">
-    <link rel="stylesheet" href="./assets/css/productCard.css"> 
-	<link rel="stylesheet" href="./assets/css/tables.css">
-    <title>View product</title>
+    <link rel="stylesheet" href="./assets/css/client-single.css">
+    <link rel="stylesheet" href="./assets/css/productCard.css">
+    <link rel="stylesheet" href="./assets/css/tables.css">
+    <title>Single client</title>
 </head>
-<%
-BDController bd = new BDController();
-int codP = Integer.parseInt(request.getParameter("codP"));
-Product p = bd.giveProductCod(codP);
-ArrayList<Product> cart = bd.allCart();
-%>
 <body>
-    <header class="header">
+	<%
+	BDController bd = new BDController();
+	ArrayList<Product> cart = bd.allCart();
+	String mensaje = "";
+	if (request.getParameter("mensaje") != null) {
+		mensaje = request.getParameter("mensaje");
+	}
+
+	int idClient = Integer.parseInt(request.getParameter("codC"));
+	Client c = bd.giveClient(idClient);
+	%>
+	<header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
     <div class="userThings">
+
       <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-    <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+      <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+
     </div>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
@@ -45,59 +52,42 @@ ArrayList<Product> cart = bd.allCart();
       </li>
     </ul>
   </header>
-      <main>
-        <article class="product">
-            <section class="productImages">
-                <div>
-                  <img src="./assets/img/products/<%=p.getIdProduct() %>.png" alt="">
-                </div>
-            </section>
-            <section class="productInformation">
-                <article class="info">
-                    <h2 class="productName"><%=p.getName() %></h2>
-                    <h3 class="productPrice">
-                    <%=p.getValue() %>$
-                    </h3>
-                    <div class="productBrand">
-                    Brand: <%=p.getBrand() %>
-                    </div>
-                    <div class="productDescription">
-                      <h4>Description</h4>
-                      <p class="description">
-                     <%=p.getDescription() %>
-                      </p>
-                    </div>
-                    <div class="especifications">
-                        <h4>Especifications</h4>
-                        <%for (String c : Util.espec(p.getCaract())){ %>
-                        <p><%=c %></p>
-                        <%} %>
-                    
-                    </div>
-                </article>
-                <div class="buttons">
-                    <a href="editProduct.jsp?codP=<%=p.getIdProduct()%>"><button class="shopButton" style="width: 100%;">Edit Product</button></a>
-					<a href="./operaciones.jsp?tipo=annadir&producto=<%=p.getIdProduct()%>"><button class="shopButton" style="width: 100%;">Add to cart</button></a>
-                </div>
-            </section>
+       <main>
+        <div class="mainContainer">
+          <article class="client">
+            <img src="./assets/img/usuario.png" alt="">
+            <div class="info">
+              <div class="clientInfo">
+                <h2 class="username"><%=c.getUsername() %></h2>
+                <p>Name: <%=c.getName() %></p>
+                <p>Last name: <%=c.getLastName()%></p>
+              </div>
+              <div class="addressInfo">
+                  <p>Address: <%=c.getAddress() %></p>
+                  <p>Province: <%=c.getProvince() %></p>
+                  <p>CP: <%=c.getCp() %></p>
+              </div>
+              <h5 class="dni"><%=c.getDni()%></h5>
+            </div>
         </article>
+        </div>
         <article class="productSalesLine">
-          <h2 style="text-align:center;">Sales line</h2>
+          <h2 class="tableTittle">User Sales</h2>
           <table border="1">
               <tr>
-                  <th>ID Line</th>
                   <th>ID Sale</th>
-                  <th>Product</th>
+                  <th>Username</th>
+                  <th>Sale Date</th>
                   <th>Units</th>
-                  <th>Unit price</th>
+                  <th>Total</th>
               </tr>
-             <%for (SaleLine sl : bd.saleLineProduct(p.getIdProduct())){ %>
+              <%for (Sale s : bd.saleClient(c.getIdCliente())){ %>
               <tr>
-                  <td><%=sl.getIdLine()%></td>
-                  <td><%=sl.getIdSale()%></td>
-                  <td><%=sl.getProduct()%></td>
-                  <td><%=sl.getUnits()%></td>
-                  <td><%=sl.getUnit_price()%></td>
+                  <td><%=s.getIdSales()%></td>
+                  <td><%=c.getUsername()%></td>
+                  <td><%=s.getSaleDate()%></td>
+                  <td><%=bd.unitsSale(s.getIdSales())%></td>
+                  <td><%=s.getTotal()%></td>
               </tr>
               <%} %>
           </table>

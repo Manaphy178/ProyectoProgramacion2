@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@ page import="java.util.*" %>
+        <%@ page import="java.util.*" %>
     <%@ page import="pcSlots.*" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,19 +12,23 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script defer src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/sells.css">
+    <link rel="stylesheet" href="./assets/css/tables.css">
     <title>Clients</title>
 </head>
 <body>
-	<%BDController bd = new BDController();
+  <%
+	BDController bd = new BDController();
 	ArrayList<Product> cart = bd.allCart();
-
+	ArrayList<Client> client = bd.allClient();
 	%>
-	<header class="header">
+  <header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
     <div class="userThings">
+
       <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-       <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+
+      <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+
     </div>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
@@ -42,6 +46,7 @@
     </ul>
   </header>
   <main>
+   <h2 class="tableTittle">Clients list</h2>
     <table border="1">
         <tr>
             <th>ID Client</th>
@@ -53,16 +58,18 @@
             <th>CP</th>
             <th>Address</th>
         </tr>
+        <%for (Client c : client){ %>
         <tr>
-            <td>campo</td>
-            <td>campo</td>
-            <td>campo</td>
-            <td>campo</td>
-            <td>campo</td>
-            <td>campo</td>
-            <td>campo</td>
-            <td>campo</td>
+            <td><a style="text-decoration: none; color: black;" href="client-single.jsp?codC=<%=c.getIdCliente() %>"><%=c.getIdCliente() %></a></td>
+            <td><a style="text-decoration: none; color: black;" href="client-single.jsp?codC=<%=c.getIdCliente() %>"><%=c.getUsername() %></a></td>
+            <td><a style="text-decoration: none; color: black;" href="client-single.jsp?codC=<%=c.getIdCliente() %>"><%=c.getName() %></a></td>
+            <td><a style="text-decoration: none; color: black;" href="client-single.jsp?codC=<%=c.getIdCliente() %>"><%=c.getLastName() %></a></td>
+            <td><a style="text-decoration: none; color: black;" href="client-single.jsp?codC=<%=c.getIdCliente() %>"><%=c.getDni() %></a></td>
+            <td><a style="text-decoration: none; color: black;" href="client-single.jsp?codC=<%=c.getIdCliente() %>"><%=c.getProvince() %></a></td>
+            <td><a style="text-decoration: none; color: black;" href="client-single.jsp?codC=<%=c.getIdCliente() %>"><%=c.getCp() %></a></td>
+            <td><a style="text-decoration: none; color: black;" href="client-single.jsp?codC=<%=c.getIdCliente() %>"><%=c.getAddress() %></a></td>
         </tr>
+        <%} %>
     </table>
   </main>
   <footer>
@@ -94,10 +101,10 @@
               <h5>Other things</h5>
               <ul class="list-unstyled quick-links">
                 <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Clients</a></li>
-                <li><a href="./sell-line.html"><i class="fa fa-angle-double-right"></i>Sells line</a></li>
-                <li><a href="./register.html"><i class="fa fa-angle-double-right"></i>Register product</a></li>
+                <li><a href="./sell-line.jsp"><i class="fa fa-angle-double-right"></i>Sells line</a></li>
+                <li><a href="./register.jsp"><i class="fa fa-angle-double-right"></i>Register product</a></li>
                 <li><a href="./deregister"><i class="fa fa-angle-double-right"></i>Deregister product</a></li>
-                <li><a href="./shop.html" title="Our products"><i class="fa fa-angle-double-right"></i>Products</a></li>
+                <li><a href="./shop.jsp" title="Our products"><i class="fa fa-angle-double-right"></i>Products</a></li>
               </ul>
             </div>
           </div> 

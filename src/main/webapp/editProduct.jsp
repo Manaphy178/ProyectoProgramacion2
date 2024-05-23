@@ -16,15 +16,22 @@
     <title>PCSLOTS</title>
 </head>
 <body>
-	<%BDController bd = new BDController();
+	<%
+	BDController bd = new BDController();
 	ArrayList<Product> cart = bd.allCart();
-
+	 
+	String mensaje = "";
+	if (request.getParameter("mensaje") != null) {
+		mensaje = request.getParameter("mensaje");
+	}
+	int codP = Integer.parseInt(request.getParameter("codP"));
+	Product p = bd.giveProductCod(codP);
 	%>
 	<header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
     <div class="userThings">
       <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-       <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+       <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
     </div>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
@@ -43,20 +50,22 @@
   </header>
   <main>
     <div class="formContainer">
-        <form class="form" action="#">
-            <input type="text" id="name" name="name" placeholder="Product name">
-            <input type="number" id="price" name="price" placeholder="Price">
-            <input type="text" id="brand" name="brand" placeholder="Brand">
+        <form class="form" action="operaciones.jsp?tipo=editProduct&modificar=<%=p.getIdProduct() %>" method="post">
+            <input type="text" id="name" name="name" placeholder="Product name" value="<%=p.getName()%>">
+            <input type="number" id="price" name="price" placeholder="Price" value="<%=p.getValue()%>">
+            <input type="text" id="brand" name="brand" placeholder="Brand" value="<%=p.getBrand()%>">
             <select id="productType" name="productType">
-                <option value="option1">Mobile Phone</option>
-                <option value="opcion2">Tablet</option>
-                <option value="opcion3">Laptops</option>
-                <option value="opcion4">Desktops</option>
-                <option value="opcion5">Other</option>
+                 <%ArrayList<String> s = new ArrayList<String>();
+    		for(Product pr : bd.allProduct()){ %>
+    			<%if (!s.contains(pr.getType())){ 
+    			s.add(pr.getType());%>
+                <option value="<%=p.getType()%>" <%if (pr.getType().equalsIgnoreCase(p.getType())){ %>selected<%} %>><%=p.getType()%></option>
+                      	 <%} %>   
+             <%} %>
               </select>
             <div class="textareas">
-                <textarea id="description" name="description" placeholder="Description"></textarea>
-                <textarea id="characteristics" name="characteristics" placeholder="Characteristics"></textarea>
+                <textarea id="description" name="description" placeholder="Description"><%=p.getDescription()%></textarea>
+                <textarea id="characteristics" name="characteristics" placeholder="Characteristics" ><%=p.getCaract()%></textarea>
             </div>
             <button type="submit" class="submitButton">Register Product</button>
           </form>

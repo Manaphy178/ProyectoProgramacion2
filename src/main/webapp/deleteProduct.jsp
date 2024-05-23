@@ -13,7 +13,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script defer src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <title>PCSLOTS</title>
+    <title>Delete product</title>
 </head>
 <body>
 	<%BDController bd = new BDController();
@@ -48,7 +48,7 @@
   <main>
     <div class="formContainer">
         <form class="form" action="./operaciones.jsp?tipo=bajaproducto" method="post">
-            <input type="number" id="productID" name="productID" placeholder="Product id" style="flex-basis: 100%;margin: 1rem;padding: 1rem;">
+            <input type="number" id="productID" name="productID" placeholder="Product id" min="1" style="flex-basis: 100%;margin: 1rem;padding: 1rem;">
            <h3>OR</h3>
             <input type="text" id="name" name="name" placeholder="Product name">
             <button type="submit" class="submitButton">Delete Product</button>

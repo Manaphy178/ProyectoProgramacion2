@@ -19,7 +19,10 @@
 <body>
 	<%BDController bd = new BDController();
 	ArrayList<Product> cart = bd.allCart();
-
+	String mensaje = "";
+	if (request.getParameter("mensaje") != null) {
+		mensaje = request.getParameter("mensaje");
+	}
 	%>
 	<header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
@@ -44,7 +47,7 @@
   </header>
   <main>
     <div class="formContainer">
-        <form class="form" action="#">
+        <form class="form" action="./operaciones.jsp?tipo=userLogin" method="post">
             <input type="text" id="username" name="username" placeholder="Username" required>
             <input type="text" id="name" name="name" placeholder="Name" required>
             <input type="text" id="lastname" name="lastname" placeholder="Last name" required>
@@ -106,6 +109,7 @@
             <button type="submit" class="submitButton">Register</button>
           </form>
     </div>
+    <h3><%=mensaje %></h3>
   </main>
   <footer>
     <!-- Footer -->

@@ -1,12 +1,16 @@
 main{
     min-height: 100vh;
     margin: 0 auto;
-    padding: 3rem;
+}
+.tableTittle{
+    text-align: center;
+    margin: 2rem;
 }
 table {
     width: 60%;
     margin: 0 auto;
     border-collapse: collapse;
+    margin-bottom: 3rem;
 }
 
 th, td {

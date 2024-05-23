@@ -12,13 +12,13 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script defer src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/sells.css">
-    <title>View product</title>
+    <link rel="stylesheet" href="./assets/css/tables.css">
+    <title>Sales line</title>
 </head>
 <body>
 	<%BDController bd = new BDController();
 	ArrayList<Product> cart = bd.allCart();
-
+ArrayList<SaleLine> sl = bd.allSaleLine();
 	%>
 	<header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
@@ -41,22 +41,25 @@
       </li>
     </ul>
   </header>
-      <main>
+     <main>
+        <h2 class="tableTittle">Sales line</h2>
         <table border="1">
             <tr>
-                <th>Título 1</th>
-                <th>Título 2</th>
-                <th>Título 3</th>
-                <th>Título 4</th>
-                <th>Título 5</th>
+                <th>ID Line</th>
+                <th>ID Sale</th>
+                <th>Product</th>
+                <th>Units</th>
+                <th>Unit price</th>
             </tr>
+            <%for (SaleLine s : sl){ %>
             <tr>
-                <td>campo</td>
-                <td>campo</td>
-                <td>campo</td>
-                <td>campo</td>
-                <td>campo</td>
+                 <td><%=s.getIdLine()%></td>
+                  <td><%=s.getIdSale()%></td>
+                  <td><%=s.getProduct()%></td>
+                  <td><%=s.getUnits()%></td>
+                  <td><%=s.getUnit_price()%></td>
             </tr>
+            <%} %>
         </table>
       </main>
       <footer>

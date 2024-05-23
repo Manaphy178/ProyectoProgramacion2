@@ -8,66 +8,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/styles.css">
-    <link rel="stylesheet" href="./assets/css/editProducts.css">
+    <link rel="stylesheet" href="./assets/css/cart.css">
+    <link rel="stylesheet" href="./assets/css/productCardHorizontal.css">
     <link rel="shortcut icon" href="./assets/img/pcSlotsLogo.ico" type="image/x-icon">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script defer src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer src="./assets/js/carrousel.js"></script>
     <title>PCSLOTS</title>
 </head>
 <body>
 	<%
 	BDController bd = new BDController();
 	ArrayList<Product> cart = bd.allCart();
-	ArrayList<Product> pro = bd.allProduct();
-	String mensaje = "";
-	if (request.getParameter("mensaje") != null) {
-		mensaje = request.getParameter("mensaje");
-	}
+	
 	%>
 	<header class="header">
-    <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
-    <div class="userThings">
-      <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-       <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
-    </div>
-    <input class="menu-btn" type="checkbox" id="menu-btn" />
-    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-    <ul class="menu">
-      <li><a href="./shop.jsp">Products</a></li>
-      <li><a href="./clients.jsp">Clients</a></li>
-      <li><a href="./sell-line.jsp">Sales line</a></li>
-      <li class="dropdown">
-        <a href="#more">More</a>
-        <ul class="dropdown-content">
-          <li><a href="./registerProduct.jsp">Register product</a></li>
-          <li><a href="./deleteProduct.jsp">Delete product</a></li>
+        <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
+        <div class="userThings">
+    
+          <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
+          <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+    
+        </div>
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+        <ul class="menu">
+          <li><a href="./shop.jsp">Products</a></li>
+          <li><a href="./clients.jsp">Clients</a></li>
+          <li><a href="./sell-line.jsp">Sales line</a></li>
+          <li class="dropdown">
+            <a href="#more">More</a>
+            <ul class="dropdown-content">
+              <li><a href="./registerProduct.jsp">Register product</a></li>
+              <li><a href="./deleteProduct.jsp">Delete product</a></li>
+            </ul>
+          </li>
         </ul>
-      </li>
-    </ul>
-  </header>
+      </header>
   <main>
-    <div class="formContainer">
-        <form class="form" action="./operaciones.jsp?tipo=altaproducto" method="post">
-            <input type="text" id="name" name="name" placeholder="Product name">
-            <input type="number" id="price" name="price" placeholder="Price">
-            <input type="text" id="brand" name="brand" placeholder="Brand">
-            <select id="productType" name="productType">
-           <option value="option1">Mobile Phone</option>
-                <option value="opcion2">Tablet</option>
-                <option value="opcion3">Laptops</option>
-                <option value="opcion4">Desktops</option>
-                <option value="opcion5">Other</option>
-              </select>
-            <div class="textareas">
-                <textarea id="description" name="description" placeholder="Description"></textarea>
-                <textarea id="characteristics" name="characteristics" placeholder="Characteristics"></textarea>
+    <div class="cartContainer">
+        <div class="productsContainer">
+            <h3>Products</h3>
+            <article class="products">
+					<%
+					ArrayList<Integer> unidades = new ArrayList<>();
+					for (Product p : cart){
+					if (!unidades.contains(p.getIdProduct())){
+						unidades.add(p.getIdProduct());
+					
+					%>
+					<section class="product">
+						<img class="productImg"
+							src="./assets/img/products/<%=p.getIdProduct()%>.png" alt="">
+						<div class="productInfo">
+							<div class="info">
+								<h4 class="brand"><%=p.getBrand()%></h4>
+								<p class="name"><%=p.getName()%></p>
+								<p class="name"><%=p.getType()%></p>
+							</div>
+							<div class="priceInfo">
+								<div class="unitPrice">
+									<h6>Unit price</h6>
+									<p><%=p.getValue()%>$
+									</p>
+								</div>
+								<div class="unitsContainer">
+									<h6>Units</h6>
+									<div class="units">
+										<button class="CartButton">-</button>
+										<p><%=bd.contarUnidadesConcretas(p.getIdProduct()) %></p>
+										<button class="CartButton">+</button>
+									</div>
+								</div>
+								<div class="totalPrice">
+									<h6>Final price</h6>
+									<p><%=p.getValue() * bd.contarUnidadesConcretas(p.getIdProduct())%>$
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+					<%
+					}
+					}
+					%>
+				</article>
+        </div>
+        <div class="resumeContainer">
+            <h3>Order resume</h3>
+            <div class="resume">
+                <div class="subtotalContainer">
+                    <p>Subtotal ( <%=bd.contarUnidades() %> products )</p>
+                    <p><%=bd.precioTotal() %>$</p>
+                </div>
+                <div class="shippingContainer">
+                    <p>Shipping</p>
+                    <p>Free</p>
+                </div>
+                <div class="totalContainer">
+                    <h5>Total</h5>
+                    <h5><%=bd.precioTotal() %>$</h5>
+                </div>
+               <a href="operaciones.jsp?tipo=ventaNueva&">	<button class="placeOrder">Place order</button></a>
             </div>
-            <button type="submit" class="submitButton">Register Product</button>
-          </form>
-        
+        </div>
     </div>
-       <h3><%=mensaje %></h3>
   </main>
   <footer>
     <!-- Footer -->

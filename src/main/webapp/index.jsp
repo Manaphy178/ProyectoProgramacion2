@@ -20,22 +20,21 @@
     <title>PCSLOTS</title>
 </head>
 <body>
-	<%BDController bd = new BDController();
+  <%BDController bd = new BDController();
 	ArrayList<Product> cart = bd.allCart();
-
 	%>
-	<header class="header">
+  <header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
     <div class="userThings">
       <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-       <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+      <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
     </div>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
     <ul class="menu">
       <li><a href="./shop.jsp">Products</a></li>
       <li><a href="./clients.jsp">Clients</a></li>
-      <li><a href="./sell-line.jsp">Sells</a></li>
+      <li><a href="./sell-line.jsp">Sales line</a></li>
       <li class="dropdown">
         <a href="#more">More</a>
         <ul class="dropdown-content">
@@ -51,16 +50,16 @@
         <div class="container-carousel">
           <div class="carruseles" id="slider">
               <section class="slider-section">
-                  <img src="https://dummyimage.com/500x200">
+                  <img src="./assets/img/index/movilesApple.png">
               </section>
               <section class="slider-section">
-                <img src="https://dummyimage.com/500x200">
+                <img src="./assets/img/index/movilSamsung.jpg">
               </section>
               <section class="slider-section">
-                <img src="https://dummyimage.com/500x200">
+                <img src="./assets/img/index/movilHuawei.jpg">
               </section>
               <section class="slider-section">
-                <img src="https://dummyimage.com/500x200">
+                <img src="./assets/img/index/movilXiaomi.jpg">
               </section>
           </div>
           <div class="btn-left"><i class='bx bx-chevron-left'></i></div>
@@ -69,31 +68,33 @@
       </section>
       <section class="gallery">
         <div class="infoGallery">
-          <h2>Lorem ipsum dolor sit amet</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet ex fringilla, aliquam massa at, sollicitudin nibh. Pellentesque porta neque a varius fermentum. Donec eleifend nunc nec rutrum faucibus. Nunc sem lorem, luctus nec dui in, viverra ultrices ipsum. Vivamus dictum quam augue, non porttitor odio auctor sed. Curabitur finibus mi consectetur laoreet porttitor. Vestibulum vel ullamcorper neque, convallis dictum arcu. Aenean congue ultricies faucibus.</p>
+          <h2>Best brands</h2>
+          <p>At our store, you will find an exceptional selection of the best brands for your laptops. We pride ourselves on offering top-quality products that cater to all your computing needs. Whether you're a student, a professional, or a casual user, we have the perfect laptop for you. Our inventory includes the latest models from renowned brands known for their reliability, performance, and innovative features.
+
+            In addition to our diverse range of laptops, we also provide comprehensive customer support to help you make an informed decision. Our knowledgeable staff is always available to answer your questions, provide recommendations, and ensure that you find a laptop that meets your specific requirements.</p>
         </div>
         <div class="galleryContainer">
           <div class="item-1">
-            <img src="https://dummyimage.com/200x300&text=1" />
+            <img src="./assets/img/index/logoMSI.jpg" />
           </div>
           <div class="item-2">
-            <img src="https://dummyimage.com/200x300&text=2" />
+            <img src="./assets/img/index/logoApple.jpg" />
           </div>
           <div class="item-3">
-            <img src="https://dummyimage.com/200x300&text=3" />
+            <img src="./assets/img/index/logoASUS.jpg" />
           </div>
           <div class="item-4">
-            <img src="https://dummyimage.com/200x300&text=4" />
+            <img src="./assets/img/index/logoLenovo.jpg" />
           </div>
         </div>
       </section>
       <section class="information">
         <div class="informationText">
-          <h2>Lorem ipsum dolor sit amet</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet ex fringilla, aliquam massa at, sollicitudin nibh. Pellentesque porta neque a varius fermentum. Donec eleifend nunc nec rutrum faucibus. Nunc sem lorem, luctus nec dui in, viverra ultrices ipsum. Vivamus dictum quam augue, non porttitor odio auctor sed. Curabitur finibus mi consectetur laoreet porttitor. Vestibulum vel ullamcorper neque, convallis dictum arcu. Aenean congue ultricies faucibus.</p>
+          <h2>Our computers</h2>
+          <p>Our computers are assembled by the best experts in the industry, ensuring that every component works seamlessly for top-notch performance and reliability. Each system undergoes meticulous assembly and rigorous testing, guaranteeing optimal functionality. Additionally, we offer the option to optimize the operating system, enhancing speed and efficiency to meet your specific needs. Whether you’re a gamer, creative professional, or business user, our experts provide personalized recommendations and customization options, such as upgrading memory and storage, to take your computing experience to the next level. Trust us to deliver a perfectly tailored machine that performs at its peak.</p>
         </div>
         <div class="informationImg">
-          <img src="https://dummyimage.com/600x700" />
+          <img src="./assets/img/index/desktop.webp" />
         </div>
       </section>
     </article>

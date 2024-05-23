@@ -42,6 +42,7 @@
     </ul>
   </header>
       <main>
+       <h2 class="tableTittle">Sales line</h2>
         <table border="1">
             <tr>
                 <th>Título 1</th>

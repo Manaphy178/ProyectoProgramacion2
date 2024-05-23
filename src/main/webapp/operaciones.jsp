@@ -21,8 +21,8 @@
 <body>
 	<%
 	String origen = request.getParameter("tipo");
-
 	BDController bd = new BDController();
+	ArrayList<Product> cart = bd.allCart();
 	if (origen.equalsIgnoreCase("annadir")) {
 		int codP = Integer.parseInt(request.getParameter("producto"));
 		bd.insertCart(codP);
@@ -36,7 +36,7 @@
 		String type = request.getParameter("productType");
 		String description = request.getParameter("description");
 		String caract = request.getParameter("characteristics");
-		bd.insertProduct(codP,value, brand, type, description, name, caract);
+		bd.insertProduct(codP, value, brand, type, description, name, caract);
 		response.sendRedirect("registerProduct.jsp?mensaje=El producto se ha registrado perfectamente");
 	} else if (origen.equalsIgnoreCase("bajaproducto")) {
 		String name = "";
@@ -45,14 +45,11 @@
 		}
 		int codP = 0;
 		String productIDParam = request.getParameter("productID");
-
 		if (productIDParam != null && !productIDParam.isEmpty()) {
-		  
-		        int productID = Integer.parseInt(productIDParam);
-		        if (productID != 0) {
-		            codP = productID;
-		        }
-		 
+			int productID = Integer.parseInt(productIDParam);
+			if (productID != 0) {
+		codP = productID;
+			}
 		}
 		if (bd.productExistsName(name) || bd.productExistsNum(codP)) {
 			bd.deleteProduct(name, codP);
@@ -60,6 +57,48 @@
 		} else {
 			response.sendRedirect("deleteProduct.jsp?mensaje=El producto introducido no existe");
 		}
+	} else if (origen.equalsIgnoreCase("editProduct")) {
+		int codP = Integer.parseInt(request.getParameter("modificar"));
+		String name = request.getParameter("name");
+		Float value = Float.valueOf(request.getParameter("price"));
+		String brand = request.getParameter("brand");
+		String type = request.getParameter("productType");
+		String description = request.getParameter("description");
+		String caract = request.getParameter("characteristics");
+		bd.updateProduct(codP, value, brand, type, description, name, caract);
+		response.sendRedirect("shop.jsp?mensaje=El producto se ha editado perfectamente");
+	}
+	if (origen.equalsIgnoreCase("userLogin")) {
+		int codC = bd.giveLastClientCod();
+		String username = request.getParameter("username");
+		String name = request.getParameter("name");
+		String last = request.getParameter("lastname");
+		String dni = request.getParameter("dni");
+		String address = request.getParameter("address");
+		String province = request.getParameter("province");
+		int cp = Integer.parseInt(request.getParameter("cp"));
+		bd.insertClient(codC, dni, username, name, last, province, cp, address);
+		response.sendRedirect("registerUser.jsp?mensaje=El usuario se ha creado con exito");
+	}
+	if (origen.equalsIgnoreCase("ventaNueva")) {
+		// Sale
+		int codSale = bd.giveLastSaleCod();
+		float total = bd.precioTotal();
+		int idClient = bd.allClient().get(0).getIdCliente();
+		bd.insertSale(codSale, total, idClient);
+		ArrayList<Integer> unidades = new ArrayList<>();
+		for (Product p : cart) {
+			if (!unidades.contains(p.getIdProduct())) {
+		unidades.add(p.getIdProduct());
+		int codSL = bd.giveLastSaleLCod();
+		int codP = p.getIdProduct();
+		int units = bd.contarUnidadesConcretas(p.getIdProduct());
+		float unitPrice = p.getValue();
+		bd.insertSaleLine(codSL, codSale, codP, units, unitPrice);
+			}
+		}
+		bd.borrarCarro();
+		response.sendRedirect("shop.jsp");
 	}
 	%>
 

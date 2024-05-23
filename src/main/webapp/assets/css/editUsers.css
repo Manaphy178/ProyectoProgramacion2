@@ -1,12 +1,17 @@
 main{
     min-height: 100vh;
 }
-
 .formContainer{
     height: 90vh;
     display: flex;
+    flex-direction: column;
+    gap: 2rem;
     justify-content: center;
     align-items: center;
+}
+h2{
+    text-align: center;
+    margin-bottom: 2rem;
 }
 .form{
         width: 60%;
