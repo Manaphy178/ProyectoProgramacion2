@@ -93,18 +93,73 @@ public class BDController {
 		return products;
 	}
 
-	public Product giveProduct(int cod) {
-		Product p = new Product();
-		String sql = "SELECT * FROM products WHERE idProduct = " + cod;
+	public Product giveProductCod(int codP) {
+		Product p = null;
+		String sql = "SELECT * FROM products WHERE idProduct = ?";
+		try (PreparedStatement mySt = con.prepareStatement(sql)) {
+			mySt.setInt(1, codP);
+
+			try (ResultSet rs = mySt.executeQuery()) {
+				if (rs.next()) {
+					p = new Product(rs.getInt("idProduct"), rs.getFloat("value"), rs.getString("brand"),
+							rs.getString("type"), rs.getString("description"), rs.getString("name"),
+							rs.getString("caract"));
+				}
+			}
+			mySt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
+
+	public Product giveProductName(String name) {
+		Product p = null;
+		String sql = "SELECT * FROM products WHERE name LIKE ?";
+		try (PreparedStatement mySt = con.prepareStatement(sql)) {
+			mySt.setString(1, name);
+
+			try (ResultSet rs = mySt.executeQuery()) {
+				if (rs.next()) {
+					p = new Product(rs.getInt("idProduct"), rs.getFloat("value"), rs.getString("brand"),
+							rs.getString("type"), rs.getString("description"), rs.getString("name"),
+							rs.getString("caract"));
+				}
+			}
+			mySt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
+
+	public void insertProduct(int codP, float value, String brand, String type, String description, String name,
+			String caract) {
+
+		String sql = "INSERT INTO products (idProduct,value, brand, type, description, name, caract) VALUES (?,?, ?, ?, ?, ?, ?)";
+		try (PreparedStatement mySt = con.prepareStatement(sql)) {
+			mySt.setInt(1, codP);
+			mySt.setFloat(2, value);
+			mySt.setString(3, brand);
+			mySt.setString(4, type);
+			mySt.setString(5, description);
+			mySt.setString(6, name);
+			mySt.setString(7, caract);
+			mySt.executeUpdate();
+			mySt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public int giveLastProCod() {
+		int cod=0;
+		String sql = "Select idProduct from products order by idProduct DESC limit 1";
 		Statement mySt;
 		try {
 			mySt = con.createStatement();
-
 			ResultSet rs = mySt.executeQuery(sql);
 			while (rs.next()) {
-				p = new Product(rs.getInt("idProduct"), rs.getFloat("value"), rs.getString("brand"),
-						rs.getString("type"), rs.getString("description"), rs.getString("name"),
-						rs.getString("caract"));
+				cod = rs.getInt("idProduct");
 			}
 			rs.close();
 			mySt.close();
@@ -112,7 +167,105 @@ public class BDController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return p;
+		return cod+1;
+	}
+
+	public void deleteProduct(String name, int codP) {
+		String sql = "";
+		if (codP != 0) {
+			sql = "DELETE FROM products WHERE idProduct = " + codP;
+		} else {
+			codP = giveProductID(name);
+			sql = "DELETE FROM products WHERE idProduct = " + codP;
+		}
+		try (PreparedStatement mySt = con.prepareStatement(sql)) {
+
+			mySt.executeUpdate(sql);
+			mySt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int giveProductID(String name) {
+		int cod = 0;
+		String sql = "SELECT idProduct from products where `name` LIKE '" + name + "'";
+		Statement mySt;
+		try {
+			mySt = con.createStatement();
+			ResultSet rs = mySt.executeQuery(sql);
+			while (rs.next()) {
+				cod = rs.getInt("idProduct");
+			}
+			rs.close();
+			mySt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cod;
+	}
+
+	public boolean productExistsNum(int codP) {
+		for (Product p : allProduct()) {
+			if (p.getIdProduct() == codP) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean productExistsName(String name) {
+		for (Product p : allProduct()) {
+			if (p.getName().equalsIgnoreCase(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public ArrayList<Product> allCart() {
+		ArrayList<Product> cart = new ArrayList<>();
+		String sql = "SELECT * FROM cart";
+		Statement mySt;
+		try {
+			mySt = con.createStatement();
+			ResultSet rs = mySt.executeQuery(sql);
+			while (rs.next()) {
+				cart.add(new Product(rs.getInt("idProduct"), rs.getFloat("value"), rs.getString("brand"),
+						rs.getString("type"), rs.getString("description"), rs.getString("name"),
+						rs.getString("caract")));
+			}
+			rs.close();
+			mySt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return cart;
+	}
+
+	public void insertCart(int codP) {
+		Product p = giveProductCod(codP);
+		if (p == null) {
+			System.out.println("Product not found: " + codP);
+			return;
+		}
+		String sql = "INSERT INTO cart (idProduct, value, brand, type, description, name, caract) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		try (PreparedStatement mySt = con.prepareStatement(sql)) {
+			mySt.setInt(1, p.getIdProduct());
+			mySt.setFloat(2, p.getValue());
+			mySt.setString(3, p.getBrand());
+			mySt.setString(4, p.getType());
+			mySt.setString(5, p.getDescription());
+			mySt.setString(6, p.getName());
+			mySt.setString(7, p.getCaract());
+
+			mySt.executeUpdate();
+			mySt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public ArrayList<Sale> allSales() {

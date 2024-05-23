@@ -16,52 +16,49 @@ main{
         background: rgb(236, 236, 236);
         box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
+.formContainer .form #username{
+    flex-basis: 100%;
+    margin: 1rem;
+    padding: 1rem;
+}
 .formContainer .form #name{
-    flex-basis: 100%;
-    margin: 1rem;
-    padding: 1rem;
-}
-.formContainer .form #productID{
-    flex-basis: 100%;
-    margin: 1rem;
-    padding: 1rem;
-}
-.formContainer .form #price{
     flex: 1;
     margin: 1rem;
     padding: 1rem;
 }
 
-.formContainer .form #brand{
-    flex: 1;
-    margin: 1rem;
-    padding: 1rem;
-}
-.formContainer .form #productType{
-    flex: 1;
-    margin: 1rem;
-    padding: 1rem;
-}
-.formContainer .form .textareas{
-    width:100%;
-    display: flex;
-    flex-wrap: wrap;
-}
-.formContainer .form #description{
-    flex: 1;
-    margin: 1rem;
-    padding: 1rem;
-}
-.formContainer .form #characteristics{
+.formContainer .form #lastname{
     flex: 1;
     margin: 1rem;
     padding: 1rem;
 }
 
-h3{
+.formContainer .form #dni{
+    flex: 1;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.formContainer .form #province{
+    flex: 1;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.formContainer .form #cp{
+    flex: 1;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.formContainer .form #address{
+    flex-basis: auto;
     width: 100%;
-    text-align: center;
+    margin: 1rem;
+    padding: 1rem;
 }
+
+
 
 .submitButton {
     width: 100%;

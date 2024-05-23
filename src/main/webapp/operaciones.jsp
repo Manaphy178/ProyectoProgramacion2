@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="java.util.*" %>
+    <%@ page import="java.io.*,java.util.*" %>
     <%@ page import="pcSlots.*" %>
-    
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,15 +19,55 @@
     <title>PCSLOTS</title>
 </head>
 <body>
-	<%BDController bd = new BDController();
-	ArrayList<Product> cart = bd.allCart();
+	<%
+	String origen = request.getParameter("tipo");
 
+	BDController bd = new BDController();
+	if (origen.equalsIgnoreCase("annadir")) {
+		int codP = Integer.parseInt(request.getParameter("producto"));
+		bd.insertCart(codP);
+		response.sendRedirect("shop.jsp");
+	}
+	if (origen.equalsIgnoreCase("altaproducto")) {
+		int codP = bd.giveLastProCod();
+		String name = request.getParameter("name");
+		Float value = Float.valueOf(request.getParameter("price"));
+		String brand = request.getParameter("brand");
+		String type = request.getParameter("productType");
+		String description = request.getParameter("description");
+		String caract = request.getParameter("characteristics");
+		bd.insertProduct(codP,value, brand, type, description, name, caract);
+		response.sendRedirect("registerProduct.jsp?mensaje=El producto se ha registrado perfectamente");
+	} else if (origen.equalsIgnoreCase("bajaproducto")) {
+		String name = "";
+		if (request.getParameter("name") != null) {
+			name = request.getParameter("name");
+		}
+		int codP = 0;
+		String productIDParam = request.getParameter("productID");
+
+		if (productIDParam != null && !productIDParam.isEmpty()) {
+		  
+		        int productID = Integer.parseInt(productIDParam);
+		        if (productID != 0) {
+		            codP = productID;
+		        }
+		 
+		}
+		if (bd.productExistsName(name) || bd.productExistsNum(codP)) {
+			bd.deleteProduct(name, codP);
+			response.sendRedirect("deleteProduct.jsp?mensaje=El producto se ha borrado exitosamente");
+		} else {
+			response.sendRedirect("deleteProduct.jsp?mensaje=El producto introducido no existe");
+		}
+	}
 	%>
+
 	<header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
     <div class="userThings">
       <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-       <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+       <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects">0</span></a>
     </div>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>

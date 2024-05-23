@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-        <%@ page import="java.util.*" %>
+ <%@ page import="java.util.*" %>
     <%@ page import="pcSlots.*" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,22 +8,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/styles.css">
-    <link rel="stylesheet" href="./assets/css/editProducts.css">
     <link rel="shortcut icon" href="./assets/img/pcSlotsLogo.ico" type="image/x-icon">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script defer src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <title>PCSLOTS</title>
+    <link rel="stylesheet" href="./assets/css/sells.css">
+    <title>Clients</title>
 </head>
 <body>
-	<%
-	BDController bd = new BDController();
+	<%BDController bd = new BDController();
 	ArrayList<Product> cart = bd.allCart();
-	ArrayList<Product> pro = bd.allProduct();
-	String mensaje = "";
-	if (request.getParameter("mensaje") != null) {
-		mensaje = request.getParameter("mensaje");
-	}
+
 	%>
 	<header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
@@ -47,29 +42,28 @@
     </ul>
   </header>
   <main>
-    <div class="formContainer">
-        <form class="form" action="./operaciones.jsp?tipo=altaproducto" method="post">
-            <input type="text" id="name" name="name" placeholder="Product name">
-            <input type="number" id="price" name="price" placeholder="Price">
-            <input type="text" id="brand" name="brand" placeholder="Brand">
-            <select id="productType" name="productType">
-            <%ArrayList<String> s = new ArrayList<String>();
-    		for(Product p : pro){%>
-    			<%if (!s.contains(p.getType())){ 
-    			s.add(p.getType());%>
-                <option value="<%=p.getType()%>"><%=p.getType()%></option>
-                      	 <%} %>   
-             <%} %>
-              </select>
-            <div class="textareas">
-                <textarea id="description" name="description" placeholder="Description"></textarea>
-                <textarea id="characteristics" name="characteristics" placeholder="Characteristics"></textarea>
-            </div>
-            <button type="submit" class="submitButton">Register Product</button>
-          </form>
-        
-    </div>
-       <h3><%=mensaje %></h3>
+    <table border="1">
+        <tr>
+            <th>ID Client</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>DNI</th>
+            <th>Province</th>
+            <th>CP</th>
+            <th>Address</th>
+        </tr>
+        <tr>
+            <td>campo</td>
+            <td>campo</td>
+            <td>campo</td>
+            <td>campo</td>
+            <td>campo</td>
+            <td>campo</td>
+            <td>campo</td>
+            <td>campo</td>
+        </tr>
+    </table>
   </main>
   <footer>
     <!-- Footer -->
@@ -100,10 +94,10 @@
               <h5>Other things</h5>
               <ul class="list-unstyled quick-links">
                 <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Clients</a></li>
-                <li><a href="./sell-line.jsp"><i class="fa fa-angle-double-right"></i>Sells line</a></li>
-                <li><a href="./register.jsp"><i class="fa fa-angle-double-right"></i>Register product</a></li>
+                <li><a href="./sell-line.html"><i class="fa fa-angle-double-right"></i>Sells line</a></li>
+                <li><a href="./register.html"><i class="fa fa-angle-double-right"></i>Register product</a></li>
                 <li><a href="./deregister"><i class="fa fa-angle-double-right"></i>Deregister product</a></li>
-                <li><a href="./shop.jsp" title="Our products"><i class="fa fa-angle-double-right"></i>Products</a></li>
+                <li><a href="./shop.html" title="Our products"><i class="fa fa-angle-double-right"></i>Products</a></li>
               </ul>
             </div>
           </div> 

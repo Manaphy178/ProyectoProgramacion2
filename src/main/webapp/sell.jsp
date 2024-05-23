@@ -16,22 +16,31 @@
     <title>View product</title>
 </head>
 <body>
-    <header class="header">
-        <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
-        <div class="userThings">
-          <a href="" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-                <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects">0</span></a>
+	<%BDController bd = new BDController();
+	ArrayList<Product> cart = bd.allCart();
 
-        </div>
-        <input class="menu-btn" type="checkbox" id="menu-btn" />
-        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-        <ul class="menu">
-          <li><a href="./shop.jsp">Products</a></li>
-          <li><a href="#about">For gambling</a></li>
-          <li><a href="#careers">Sells</a></li>
-          <li><a href="contact.jsp">Contact</a></li>
+	%>
+	<header class="header">
+    <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
+    <div class="userThings">
+      <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
+       <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+    </div>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <ul class="menu">
+      <li><a href="./shop.jsp">Products</a></li>
+      <li><a href="./clients.jsp">Clients</a></li>
+      <li><a href="./sell-line.jsp">Sales line</a></li>
+      <li class="dropdown">
+        <a href="#more">More</a>
+        <ul class="dropdown-content">
+          <li><a href="./registerProduct.jsp">Register product</a></li>
+          <li><a href="./deleteProduct.jsp">Delete product</a></li>
         </ul>
-      </header>
+      </li>
+    </ul>
+  </header>
       <main>
         <table border="1">
             <tr>

@@ -16,29 +16,42 @@
     <link rel="stylesheet" href="./assets/css/productCard.css">
     <title>Products shop</title>
 </head>
-<% BDController bd = new BDController();%>
+<% BDController bd = new BDController();
+ArrayList<Product> cart = bd.allCart();
+ArrayList<Product> pro = bd.allProduct();%>
 <body>
-    <header class="header">
-        <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
-        <div class="userThings">
-          <a href="" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-                <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects">0</span></a>
-
-        </div>
-        <input class="menu-btn" type="checkbox" id="menu-btn" />
-        <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-        <ul class="menu">
-          <li><a href="./shop.jsp">Products</a></li>
-          <li><a href="#about">For gambling</a></li>
-          <li><a href="#careers">Sells</a></li>
-          <li><a href="contact.jsp">Contact</a></li>
+	<header class="header">
+    <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
+    <div class="userThings">
+      <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
+       <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+    </div>
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    <ul class="menu">
+      <li><a href="./shop.jsp">Products</a></li>
+      <li><a href="./clients.jsp">Clients</a></li>
+      <li><a href="./sell-line.jsp">Sales line</a></li>
+      <li class="dropdown">
+        <a href="#more">More</a>
+        <ul class="dropdown-content">
+          <li><a href="./registerProduct.jsp">Register product</a></li>
+          <li><a href="./deleteProduct.jsp">Delete product</a></li>
         </ul>
-      </header>
+      </li>
+    </ul>
+  </header>
       <aside class="aside">
         <div class="asideContent">
             <h2>Categories</h2>
             <ul class="categories">
-                <li><a href="#">Categoria01</a></li>
+            <%ArrayList<String> s = new ArrayList<String>();
+    		for(Product p : pro){%>
+    			<%if (!s.contains(p.getType())){ 
+    			s.add(p.getType());%>
+               	 <li><a href="#"><%=p.getType() %></a></li>
+            	 <%} %>   
+             <%} %>
             </ul>
         </div>
       </aside>
@@ -56,13 +69,13 @@
                 </div>
             </div>
             <div class="productContainer">
-            <% for (Product p : bd.allProduct()){ %>
+            <% for (Product p : pro){ %>
                 <div class="productCard">
                     <img class="imagenProducto" src="./assets/img/products/<%=p.getIdProduct() %>.png" alt="">
                     <p class="nombre"><%=p.getName() %></p>
                     <h3 class="precio"><%=p.getValue() %>$</h3>
                     <p class="envio">Envio gratis</p>
-                    <a href="./shop-single.jsp?codP=<%=p.getIdProduct() %>" style="width:100%"><button class="addCartButton">Add to cart</button></a>
+                    <a href="./shop-single.jsp?codP=<%=p.getIdProduct() %>" style="width:100%"><button class="addCartButton">View product</button></a>
                 </div>
                 <%} %>
             </div>

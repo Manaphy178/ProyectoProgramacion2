@@ -16,19 +16,26 @@
     <title>PCSLOTS</title>
 </head>
 <body>
-  <header class="header">
+	<%BDController bd = new BDController();
+	ArrayList<Product> cart = bd.allCart();
+	String mensaje = "";
+	if (request.getParameter("mensaje") != null) {
+		mensaje = request.getParameter("mensaje");
+	}
+
+	%>
+	<header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
     <div class="userThings">
-      <a href="" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-           <a href="" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects">0</span></a>
-
+      <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
+       <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
     </div>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
     <ul class="menu">
       <li><a href="./shop.jsp">Products</a></li>
-      <li><a href="#about">Clients</a></li>
-      <li><a href="./sell-line.jsp">Sells</a></li>
+      <li><a href="./clients.jsp">Clients</a></li>
+      <li><a href="./sell-line.jsp">Sales line</a></li>
       <li class="dropdown">
         <a href="#more">More</a>
         <ul class="dropdown-content">
@@ -40,13 +47,15 @@
   </header>
   <main>
     <div class="formContainer">
-        <form class="form" action="#">
-            <input type="text" id="name" name="name" placeholder="Product id">
-            <h3>OR</h3>
+        <form class="form" action="./operaciones.jsp?tipo=bajaproducto" method="post">
+            <input type="number" id="productID" name="productID" placeholder="Product id" style="flex-basis: 100%;margin: 1rem;padding: 1rem;">
+           <h3>OR</h3>
             <input type="text" id="name" name="name" placeholder="Product name">
             <button type="submit" class="submitButton">Delete Product</button>
         </form>
+       
     </div>
+<h3><%=mensaje %></h3>
   </main>
   <footer>
     <!-- Footer -->
