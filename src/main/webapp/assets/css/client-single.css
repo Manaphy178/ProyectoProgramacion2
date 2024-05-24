@@ -18,7 +18,8 @@ main .mainContainer .client{
 }
 main .mainContainer .client img{
     width: 20rem;
-    height: auto;
+    height: 20rem;
+    object-fit: cover;
     padding: 1rem;
     margin: 0rem 1rem;
 }

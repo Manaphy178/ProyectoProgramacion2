@@ -91,6 +91,16 @@ public class BDController {
 		}
 	}
 
+	public void deleteProCart(int idProduct) {
+		String sql = "DELETE FROM cart where idProduct = " + idProduct + " LIMIT 1";
+		try (PreparedStatement mySt = con.prepareStatement(sql)) {
+			mySt.executeUpdate(sql);
+			mySt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void insertClient(int idClient, String dni, String user, String name, String last, String province, int cp,
 			String address) {
 		String sql = "INSERT INTO client (idClient,dni, username, name, lastname, province, cp,address) VALUES (?,?, ?, ?, ?, ?, ?, ?)";

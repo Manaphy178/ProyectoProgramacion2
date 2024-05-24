@@ -20,6 +20,7 @@
 <%
 BDController bd = new BDController();
 int codP = Integer.parseInt(request.getParameter("codP"));
+int num = Integer.parseInt(request.getParameter("foto"));
 Product p = bd.giveProductCod(codP);
 ArrayList<Product> cart = bd.allCart();
 %>
@@ -49,7 +50,7 @@ ArrayList<Product> cart = bd.allCart();
         <article class="product">
             <section class="productImages">
                 <div>
-                  <img src="./assets/img/products/<%=p.getIdProduct() %>.png" alt="">
+                  <img src="./assets/img/products/<%=num %>.png" alt="">
                 </div>
             </section>
             <section class="productInformation">
@@ -103,64 +104,52 @@ ArrayList<Product> cart = bd.allCart();
           </table>
         </article>
       </main>
-      <footer>
-        <!-- Footer -->
-          <section id="footer">
-            <div class="container">
-              <div class="move row text-center text-xs-center text-sm-left text-md-left">
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                  <h5>Products</h5>
-                  <ul class="list-unstyled quick-links">
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Mobile Phones</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Tablets</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Laptops</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Desktop</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Other</a></li>
-                  </ul>
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                  <h5>For gambling</h5>
-                  <ul class="list-unstyled quick-links">
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Produts</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>LootBoxes</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Promotions</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About us</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>This is a scam?</a></li>
-                  </ul>
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4">
-                  <h5>Other things</h5>
-                  <ul class="list-unstyled quick-links">
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Sells</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Sells lines</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Users</a></li>
-                    <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Products</a></li>
-                    <li><a href="javascript:void(); title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-                  <ul class="list-unstyled list-inline social text-center">
-                    <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-facebook"></i></a></li>
-                    <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-twitter"></i></a></li>
-                    <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-instagram"></i></a></li>
-                    <li class="list-inline-item"><a href="javascript:void();"><i class="fa fa-google-plus"></i></a></li>
-                    <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i class="fa fa-envelope"></i></a></li>
-                  </ul>
-                </div>
-                </hr>
-              </div>  
-              <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center">
-                  <p><u><a href=javascript:void();>PCSLOTS Corporation</a></u> is a Registered MSP/ISO of Ludopathy, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp, Minneapolis, MN]</p>
-                  <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="javascript:void();" target="_blank">PCSLOTS</a></p>
-                </div>
-                </hr>
-              </div>  
+  <footer>
+    <!-- Footer -->
+      <section id="footer">
+        <div class="container">
+          <div class="move row text-center text-xs-center text-sm-left text-md-left">
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <h5>Products</h5>
+              <ul class="list-unstyled quick-links">
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Mobile Phones</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Tablets</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Laptops</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Desktop</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Other</a></li>
+              </ul>
             </div>
-          </section>
-          <!-- ./Footer -->
-    </footer>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <h5>For gambling</h5>
+              <ul class="list-unstyled quick-links">
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Products</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>LootBoxes</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Promotions</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About us</a></li>
+                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>This is a scam?</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+              <h5>Other things</h5>
+              <ul class="list-unstyled quick-links">
+                <li><a href="clients.jsp"><i class="fa fa-angle-double-right"></i>Clients</a></li>
+                <li><a href="./sell-line.jsp"><i class="fa fa-angle-double-right"></i>Sells line</a></li>
+                <li><a href="./registerProduct.jsp"><i class="fa fa-angle-double-right"></i>Register product</a></li>
+                <li><a href="deleteProduct.jsp"><i class="fa fa-angle-double-right"></i>Deregister product</a></li>
+                <li><a href="./shop.jsp" title="Our products"><i class="fa fa-angle-double-right"></i>Products</a></li>
+              </ul>
+            </div>
+          </div> 
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center">
+              <p><u><a href=javascript:void();>PCSLOTS Corporation</a></u> is a Registered MSP/ISO of Ludopathy, Inc. Georgia [a wholly owned subsidiary of U.S. Bancorp, Minneapolis, MN]</p>
+              <p class="h6">&copy All right Reversed.<a class="text-green ml-2" href="javascript:void();" target="_blank">PCSLOTS</a></p>
+            </div>
+            </hr>
+          </div>  
+        </div>
+      </section>
+      <!-- ./Footer -->
+</footer>
 </body>
 </html>

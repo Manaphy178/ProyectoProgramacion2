@@ -89,7 +89,6 @@ aside .asideContent .categories li{
     height: 4rem;
     border-top: 1px solid rgb(0, 0, 0);
 }
-
 footer{
     grid-area: footer;
 }

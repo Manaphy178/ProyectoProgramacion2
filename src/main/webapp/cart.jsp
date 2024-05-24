@@ -21,6 +21,11 @@
 	<%
 	BDController bd = new BDController();
 	ArrayList<Product> cart = bd.allCart();
+	String mensaje = "";
+	if (request.getParameter("mensaje") != null) {
+		mensaje = request.getParameter("mensaje");
+	}
+	
 	
 	%>
 	<header class="header">
@@ -50,17 +55,23 @@
     <div class="cartContainer">
         <div class="productsContainer">
             <h3>Products</h3>
+            <h4 style="text-align:center; margin-top:3rem;"><%=mensaje %></h4>
             <article class="products">
+            
 					<%
 					ArrayList<Integer> unidades = new ArrayList<>();
 					for (Product p : cart){
 					if (!unidades.contains(p.getIdProduct())){
+						int num = 0;
+						if (p.getIdProduct() <= 42){
+		            		num = p.getIdProduct();
+		            	}
 						unidades.add(p.getIdProduct());
 					
 					%>
 					<section class="product">
 						<img class="productImg"
-							src="./assets/img/products/<%=p.getIdProduct()%>.png" alt="">
+							src="./assets/img/products/<%=num%>.png" alt="">
 						<div class="productInfo">
 							<div class="info">
 								<h4 class="brand"><%=p.getBrand()%></h4>
@@ -76,9 +87,9 @@
 								<div class="unitsContainer">
 									<h6>Units</h6>
 									<div class="units">
-										<button class="CartButton">-</button>
+										<a href="operaciones.jsp?tipo=quitarCarro&producto=<%=p.getIdProduct()%>"><button class="CartButton">-</button></a>
 										<p><%=bd.contarUnidadesConcretas(p.getIdProduct()) %></p>
-										<button class="CartButton">+</button>
+										<a href="operaciones.jsp?tipo=annadirCarro&producto=<%=p.getIdProduct()%>"><button class="CartButton">+</button></a>
 									</div>
 								</div>
 								<div class="totalPrice">
@@ -88,6 +99,7 @@
 								</div>
 							</div>
 						</div>
+						
 					</section>
 					<%
 					}
@@ -110,9 +122,10 @@
                     <h5>Total</h5>
                     <h5><%=bd.precioTotal() %>$</h5>
                 </div>
-               <a href="operaciones.jsp?tipo=ventaNueva&">	<button class="placeOrder">Place order</button></a>
+               <a href="operaciones.jsp?tipo=ventaNueva">	<button class="placeOrder">Place order</button></a>
             </div>
         </div>
+    
     </div>
   </main>
   <footer>
@@ -123,17 +136,17 @@
             <div class="col-xs-12 col-sm-4 col-md-4">
               <h5>Products</h5>
               <ul class="list-unstyled quick-links">
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Mobile Phones</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Tablets</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Laptops</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Desktop</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Other</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Mobile Phones</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Tablets</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Laptops</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Desktop</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Other</a></li>
               </ul>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
               <h5>For gambling</h5>
               <ul class="list-unstyled quick-links">
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Products</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Products</a></li>
                 <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>LootBoxes</a></li>
                 <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Promotions</a></li>
                 <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About us</a></li>
@@ -143,10 +156,10 @@
             <div class="col-xs-12 col-sm-4 col-md-4">
               <h5>Other things</h5>
               <ul class="list-unstyled quick-links">
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Clients</a></li>
+                <li><a href="clients.jsp"><i class="fa fa-angle-double-right"></i>Clients</a></li>
                 <li><a href="./sell-line.jsp"><i class="fa fa-angle-double-right"></i>Sells line</a></li>
-                <li><a href="./register.jsp"><i class="fa fa-angle-double-right"></i>Register product</a></li>
-                <li><a href="./deregister"><i class="fa fa-angle-double-right"></i>Deregister product</a></li>
+                <li><a href="./registerProduct.jsp"><i class="fa fa-angle-double-right"></i>Register product</a></li>
+                <li><a href="deleteProduct.jsp"><i class="fa fa-angle-double-right"></i>Deregister product</a></li>
                 <li><a href="./shop.jsp" title="Our products"><i class="fa fa-angle-double-right"></i>Products</a></li>
               </ul>
             </div>

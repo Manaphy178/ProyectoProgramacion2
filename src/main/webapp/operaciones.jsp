@@ -27,6 +27,14 @@
 		int codP = Integer.parseInt(request.getParameter("producto"));
 		bd.insertCart(codP);
 		response.sendRedirect("shop.jsp");
+	}else if (origen.equalsIgnoreCase("annadirCarro")){
+		int codP = Integer.parseInt(request.getParameter("producto"));
+		bd.insertCart(codP);
+		response.sendRedirect("cart.jsp");
+	}else if(origen.equalsIgnoreCase("quitarCarro")){
+		int codP = Integer.parseInt(request.getParameter("producto"));
+		bd.deleteProCart(codP);
+		response.sendRedirect("cart.jsp");
 	}
 	if (origen.equalsIgnoreCase("altaproducto")) {
 		int codP = bd.giveLastProCod();
@@ -115,7 +123,7 @@
 			}
 		}
 		bd.borrarCarro();
-		response.sendRedirect("shop.jsp");
+		response.sendRedirect("cart.jsp?mensaje=La venta se ha realiza correctamente");
 	}
 	%>
 

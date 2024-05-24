@@ -47,6 +47,7 @@
   </header>
   <main>
     <div class="formContainer">
+     <h1>Delete Product</h1>
         <form class="form" action="./operaciones.jsp?tipo=bajaproducto" method="post">
             <input type="number" id="productID" name="productID" placeholder="Product id" min="1" style="flex-basis: 100%;margin: 1rem;padding: 1rem;">
            <h3>OR</h3>
@@ -65,17 +66,17 @@
             <div class="col-xs-12 col-sm-4 col-md-4">
               <h5>Products</h5>
               <ul class="list-unstyled quick-links">
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Mobile Phones</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Tablets</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Laptops</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Desktop</a></li>
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Other</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Mobile Phones</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Tablets</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Laptops</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Desktop</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Other</a></li>
               </ul>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4">
               <h5>For gambling</h5>
               <ul class="list-unstyled quick-links">
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Products</a></li>
+                <li><a href="shop.jsp"><i class="fa fa-angle-double-right"></i>Products</a></li>
                 <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>LootBoxes</a></li>
                 <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Promotions</a></li>
                 <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About us</a></li>
@@ -85,10 +86,10 @@
             <div class="col-xs-12 col-sm-4 col-md-4">
               <h5>Other things</h5>
               <ul class="list-unstyled quick-links">
-                <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Clients</a></li>
+                <li><a href="clients.jsp"><i class="fa fa-angle-double-right"></i>Clients</a></li>
                 <li><a href="./sell-line.jsp"><i class="fa fa-angle-double-right"></i>Sells line</a></li>
-                <li><a href="./register.jsp"><i class="fa fa-angle-double-right"></i>Register product</a></li>
-                <li><a href="./deregister"><i class="fa fa-angle-double-right"></i>Deregister product</a></li>
+                <li><a href="./registerProduct.jsp"><i class="fa fa-angle-double-right"></i>Register product</a></li>
+                <li><a href="deleteProduct.jsp"><i class="fa fa-angle-double-right"></i>Deregister product</a></li>
                 <li><a href="./shop.jsp" title="Our products"><i class="fa fa-angle-double-right"></i>Products</a></li>
               </ul>
             </div>
