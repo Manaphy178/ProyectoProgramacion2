@@ -56,7 +56,7 @@
         <div class="mainContainer">
           <article class="client">
           <%int num = 0;
-    		if (c.getIdCliente() <=10){
+    		if (c.getIdCliente() <=11){
     			num = c.getIdCliente();
     		}%>
             <img src="./assets/img/client/<%=num %>.png" alt="">
