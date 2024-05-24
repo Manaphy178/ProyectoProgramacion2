@@ -108,8 +108,12 @@
 							ArrayList<Product>comprobaciones = new ArrayList<>();
 							// Generar y mostrar números aleatorios del ArrayList
 							for (int i = 0; i < 8; i++) {
+								int num=0;
 								int randomIndex = rand.nextInt(pro.size());
 								Product p = pro.get(randomIndex);
+								if (p.getIdProduct() <= 42){
+				            		num = p.getIdProduct();
+				            	}
 								if(!comprobaciones.contains(p)){
 									comprobaciones.add(p);
 							%>
@@ -117,11 +121,11 @@
 							<div class="swiper-slide">
               <div class="productContainer">
                 <div class="productCard">
-                    <img class="imagenProducto" src="./assets/img/products/<%=p.getIdProduct() %>.png" alt="">
+                    <img class="imagenProducto" src="./assets/img/products/<%=num %>.png" alt="">
                     <p class="nombre"><%=p.getName() %></p>
                     <h3 class="precio"><%=p.getValue() %>$</h3>
                     <p class="envio">Envio gratis</p>
-                   <a href="./shop-single.jsp?codP=<%=p.getIdProduct() %>" style="width:100%"><button class="addCartButton">View product</button></a>
+                   <a href="./shop-single.jsp?codP=<%=p.getIdProduct() %>&foto=<%=num %>" style="width:100%"><button class="addCartButton">View product</button></a>
                 </div>
             </div>
             </div>
