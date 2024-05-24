@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-     <%@ page import="java.util.*" %>
+                <%@ page import="java.util.*" %>
     <%@ page import="pcSlots.*" %>
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,18 +16,24 @@
     <title>Register User</title>
 </head>
 <body>
-	<%BDController bd = new BDController();
+<%
+	BDController bd = new BDController();
 	ArrayList<Product> cart = bd.allCart();
 	String mensaje = "";
 	if (request.getParameter("mensaje") != null) {
 		mensaje = request.getParameter("mensaje");
 	}
+
+	int idClient = Integer.parseInt(request.getParameter("codC"));
+	Client c = bd.giveClient(idClient);
 	%>
-	<header class="header">
+  <header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
     <div class="userThings">
+
       <a href="./registerUser.jsp" class="userInfo"><img src="./assets/img/usuario.png" alt=""></a>
-       <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+      <a href="./cart.jsp" class="shopCart"><img src="./assets/img/carrito-de-compras.png" alt=""><span class="cartObjects"><%=Util.carritoNum(cart) %></span></a>
+
     </div>
     <input class="menu-btn" type="checkbox" id="menu-btn" />
     <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
@@ -46,16 +51,15 @@
     </ul>
   </header>
   <main>
-  
     <div class="formContainer">
-    <h1>Register User</h1>
-        <form class="form" action="./operaciones.jsp?tipo=userLogin" method="post">
-            <input type="text" id="username" name="username" placeholder="Username" required>
-            <input type="text" id="name" name="name" placeholder="Name" required>
-            <input type="text" id="lastname" name="lastname" placeholder="Last name" required>
-            <input type="text" id="dni" name="dni" placeholder="DNI" required>
-            <input type="text" id="address" name="address" placeholder="Address" required>
-            <input type="number" id="cp" name="cp" placeholder="CP" required>
+      <h2>Edit user</h2>
+        <form class="form" action="./operaciones.jsp?tipo=userEdit&codC=<%=c.getIdCliente() %>" method="post">
+            <input type="text" id="username" name="username" placeholder="Username" required value="<%=c.getUsername()%>">
+            <input type="text" id="name" name="name" placeholder="Name" required value="<%=c.getName()%>">
+            <input type="text" id="lastname" name="lastname" placeholder="Last name" required value="<%=c.getLastName()%>">
+            <input type="text" id="dni" name="dni" placeholder="DNI" required value="<%=c.getDni()%>">
+            <input type="text" id="address" name="address" placeholder="Address" required value="<%=c.getAddress()%>">
+            <input type="number" id="cp" name="cp" placeholder="CP" required value="<%=c.getCp()%>">
             <select id="province" name="province">
                 <option value="alava">Álava</option>
                 <option value="albacete">Albacete</option>
@@ -111,7 +115,6 @@
             <button type="submit" class="submitButton">Register</button>
           </form>
     </div>
-    <h3><%=mensaje %></h3>
   </main>
   <footer>
     <!-- Footer -->
@@ -142,10 +145,10 @@
               <h5>Other things</h5>
               <ul class="list-unstyled quick-links">
                 <li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Clients</a></li>
-                <li><a href="./sell-line.html"><i class="fa fa-angle-double-right"></i>Sells line</a></li>
-                <li><a href="./register.html"><i class="fa fa-angle-double-right"></i>Register product</a></li>
+                <li><a href="./sell-line.jsp"><i class="fa fa-angle-double-right"></i>Sells line</a></li>
+                <li><a href="./register.jsp"><i class="fa fa-angle-double-right"></i>Register product</a></li>
                 <li><a href="./deregister"><i class="fa fa-angle-double-right"></i>Deregister product</a></li>
-                <li><a href="./shop.html" title="Our products"><i class="fa fa-angle-double-right"></i>Products</a></li>
+                <li><a href="./shop.jsp" title="Our products"><i class="fa fa-angle-double-right"></i>Products</a></li>
               </ul>
             </div>
           </div> 

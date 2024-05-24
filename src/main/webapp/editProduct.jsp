@@ -59,7 +59,7 @@
     		for(Product pr : bd.allProduct()){ %>
     			<%if (!s.contains(pr.getType())){ 
     			s.add(pr.getType());%>
-                <option value="<%=p.getType()%>" <%if (pr.getType().equalsIgnoreCase(p.getType())){ %>selected<%} %>><%=p.getType()%></option>
+                <option value="<%=pr.getType()%>" <%if (pr.getType().equalsIgnoreCase(p.getType())){ %>selected<%} %>><%=pr.getType()%></option>
                       	 <%} %>   
              <%} %>
               </select>

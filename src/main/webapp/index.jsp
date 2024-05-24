@@ -12,16 +12,24 @@
     <link rel="stylesheet" href="./assets/css/carrousel.css">
     <link rel="stylesheet" href="./assets/css/gallery.css">
     <link rel="stylesheet" href="./assets/css/information.css">
+    <link rel="stylesheet" href="./assets/css/productCard.css">
+    <link rel="stylesheet" href="./assets/css/productsCarrousel.css">
     <link rel="shortcut icon" href="./assets/img/pcSlotsLogo.ico" type="image/x-icon">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script defer src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script defer src="./assets/js/carrousel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <title>PCSLOTS</title>
 </head>
 <body>
   <%BDController bd = new BDController();
 	ArrayList<Product> cart = bd.allCart();
+	ArrayList<Product> pro = bd.allProduct();
 	%>
   <header class="header">
     <a href="./index.jsp" class="logo"><img src="./assets/img/pcSlotsLogo.png" alt=""></a>
@@ -87,6 +95,66 @@
             <img src="./assets/img/index/logoLenovo.jpg" />
           </div>
         </div>
+      </section>
+      <section class="topProducts">
+      <h2>Top 5 products of the month</h2>
+      <!-- Slider main container -->
+      <div class="containerProductsCarrousel">
+        <div class="swiper mySwiper">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+							<%
+							Random rand = new Random();
+							ArrayList<Product>comprobaciones = new ArrayList<>();
+							// Generar y mostrar números aleatorios del ArrayList
+							for (int i = 0; i < 8; i++) {
+								int randomIndex = rand.nextInt(pro.size());
+								Product p = pro.get(randomIndex);
+								if(!comprobaciones.contains(p)){
+									comprobaciones.add(p);
+							%>
+
+							<div class="swiper-slide">
+              <div class="productContainer">
+                <div class="productCard">
+                    <img class="imagenProducto" src="./assets/img/products/<%=p.getIdProduct() %>.png" alt="">
+                    <p class="nombre"><%=p.getName() %></p>
+                    <h3 class="precio"><%=p.getValue() %>$</h3>
+                    <p class="envio">Envio gratis</p>
+                   <a href="./shop-single.jsp?codP=<%=p.getIdProduct() %>" style="width:100%"><button class="addCartButton">View product</button></a>
+                </div>
+            </div>
+            </div>
+            <%} else{
+            	i--;
+            }
+								} %>
+            </div>
+          </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script type="module">
+          import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+          const swiper = new Swiper(".mySwiper", {
+              effect: "coverflow",
+              grabCursor: false,
+              centeredSlides: true,
+              autoplay: {
+                delay: 3000,
+              },
+              slidesPerView: "5",
+              loop: true,
+              coverflowEffect: {
+                  depth:500,
+                  modifer:1,
+                  slidesShadows:true,
+                  // rotate:0,
+                  // stretch:0
+              }
+          })
+        </script>
       </section>
       <section class="information">
         <div class="informationText">

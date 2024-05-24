@@ -6,6 +6,7 @@ main .mainContainer{
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 main .mainContainer .client{
     width: 50%;
@@ -37,6 +38,61 @@ main .mainContainer .client .username{
 main .mainContainer .client .dni{
     text-align: end;
 }
-main .mainContainer .client .info{
-
+main .mainContainer .buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    gap: 1rem;
+    margin: 1rem;
 }
+.linkButton{
+    flex: 1;
+}
+.editButton{
+    flex: 1;
+}
+.editButton {
+    width: 100%;
+    margin: 2rem;
+    appearance: none;
+    background-color: transparent;
+    border: 0.125em solid #1A1A1A;
+    border-radius: 0.9375em;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 3.75em;
+    min-width: 0;
+    outline: none;
+    padding: 1em 2.3em;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    will-change: transform;
+   }
+
+   .editButton:disabled {
+    pointer-events: none;
+   }
+   
+   .editButton:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+   }
+   
+   .editButton:active {
+    box-shadow: none;
+    transform: translateY(0);
+   }

@@ -72,6 +72,25 @@ public class BDController {
 		return c;
 	}
 
+	public boolean existClient(int idClient) {
+		for (Client c : allClient()) {
+			if (c.getIdCliente() == idClient) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void deleteClient(int idClient) {
+		String sql = "DELETE FROM client where idClient = " + idClient;
+		try (PreparedStatement mySt = con.prepareStatement(sql)) {
+			mySt.executeUpdate(sql);
+			mySt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void insertClient(int idClient, String dni, String user, String name, String last, String province, int cp,
 			String address) {
 		String sql = "INSERT INTO client (idClient,dni, username, name, lastname, province, cp,address) VALUES (?,?, ?, ?, ?, ?, ?, ?)";
@@ -84,6 +103,26 @@ public class BDController {
 			mySt.setString(6, province);
 			mySt.setInt(7, cp);
 			mySt.setString(8, address);
+			mySt.executeUpdate();
+			mySt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void updateClient(int idClient, String dni, String user, String name, String last, String province, int cp,
+			String address) {
+		String sql = "UPDATE client SET dni = ?, username = ?, name = ?, lastname = ?, province = ?, cp = ?, address = ? WHERE idClient = ?";
+		try (PreparedStatement mySt = con.prepareStatement(sql)) {
+			mySt.setString(1, dni);
+			mySt.setString(2, user);
+			mySt.setString(3, name);
+			mySt.setString(4, last);
+			mySt.setString(5, province);
+			mySt.setInt(6, cp);
+			mySt.setString(7, address);
+			mySt.setInt(8, idClient);
+
 			mySt.executeUpdate();
 			mySt.close();
 		} catch (SQLException e) {
@@ -384,9 +423,10 @@ public class BDController {
 		return saleCod;
 
 	}
-	public ArrayList<Sale> saleClient(int idClient){
+
+	public ArrayList<Sale> saleClient(int idClient) {
 		ArrayList<Sale> sales = new ArrayList<Sale>();
-		String sql = "select * from sale where idClient = "+idClient;
+		String sql = "select * from sale where idClient = " + idClient;
 		Statement mySt;
 		try {
 			mySt = con.createStatement();
@@ -464,6 +504,7 @@ public class BDController {
 		}
 		return lines;
 	}
+
 	public ArrayList<SaleLine> saleLineSale(int idSale) {
 		ArrayList<SaleLine> lines = new ArrayList<>();
 
@@ -484,6 +525,7 @@ public class BDController {
 		}
 		return lines;
 	}
+
 	public ArrayList<SaleLine> saleLineProduct(int product) {
 		ArrayList<SaleLine> lines = new ArrayList<>();
 
@@ -643,9 +685,10 @@ public class BDController {
 			e.printStackTrace();
 		}
 	}
+
 	public int unitsSale(int idSale) {
-		int num=0;
-		String sql = "SELECT SUM(units) as 'Unidades' FROM sales_line WHERE idSales = "+idSale;
+		int num = 0;
+		String sql = "SELECT SUM(units) as 'Unidades' FROM sales_line WHERE idSales = " + idSale;
 		Statement mySt;
 		try {
 			mySt = con.createStatement();

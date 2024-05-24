@@ -37,7 +37,7 @@
 		String description = request.getParameter("description");
 		String caract = request.getParameter("characteristics");
 		bd.insertProduct(codP, value, brand, type, description, name, caract);
-		response.sendRedirect("registerProduct.jsp?mensaje=El producto se ha registrado perfectamente");
+		response.sendRedirect("registerProduct.jsp?mensaje=The product has been registered perfectly");
 	} else if (origen.equalsIgnoreCase("bajaproducto")) {
 		String name = "";
 		if (request.getParameter("name") != null) {
@@ -53,9 +53,9 @@
 		}
 		if (bd.productExistsName(name) || bd.productExistsNum(codP)) {
 			bd.deleteProduct(name, codP);
-			response.sendRedirect("deleteProduct.jsp?mensaje=El producto se ha borrado exitosamente");
+			response.sendRedirect("deleteProduct.jsp?mensaje=The product has been successfully deleted");
 		} else {
-			response.sendRedirect("deleteProduct.jsp?mensaje=El producto introducido no existe");
+			response.sendRedirect("deleteProduct.jsp?mensaje=The product entered does not exist");
 		}
 	} else if (origen.equalsIgnoreCase("editProduct")) {
 		int codP = Integer.parseInt(request.getParameter("modificar"));
@@ -66,7 +66,7 @@
 		String description = request.getParameter("description");
 		String caract = request.getParameter("characteristics");
 		bd.updateProduct(codP, value, brand, type, description, name, caract);
-		response.sendRedirect("shop.jsp?mensaje=El producto se ha editado perfectamente");
+		response.sendRedirect("shop.jsp?mensaje=The product has been edited perfectly");
 	}
 	if (origen.equalsIgnoreCase("userLogin")) {
 		int codC = bd.giveLastClientCod();
@@ -78,7 +78,24 @@
 		String province = request.getParameter("province");
 		int cp = Integer.parseInt(request.getParameter("cp"));
 		bd.insertClient(codC, dni, username, name, last, province, cp, address);
-		response.sendRedirect("registerUser.jsp?mensaje=El usuario se ha creado con exito");
+		response.sendRedirect("registerUser.jsp?mensaje=The user has been created successfully");
+	} else if (origen.equalsIgnoreCase("userEdit")) {
+		int codC = Integer.parseInt(request.getParameter("codC"));
+		String username = request.getParameter("username");
+		String name = request.getParameter("name");
+		String last = request.getParameter("lastname");
+		String dni = request.getParameter("dni");
+		String address = request.getParameter("address");
+		String province = request.getParameter("province");
+		int cp = Integer.parseInt(request.getParameter("cp"));
+		bd.updateClient(codC, dni, username, name, last, province, cp, address);
+		response.sendRedirect("clients.jsp");
+	} else if (origen.equalsIgnoreCase("userDelete")) {
+		int codC = Integer.parseInt(request.getParameter("codC"));
+		if (bd.existClient(codC)) {
+			bd.deleteClient(codC);
+			response.sendRedirect("clients.jsp");
+		}
 	}
 	if (origen.equalsIgnoreCase("ventaNueva")) {
 		// Sale

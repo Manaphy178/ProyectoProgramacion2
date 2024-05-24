@@ -1,13 +1,13 @@
 let moviles = document.querySelectorAll("#Mobilecont");
 let desk = document.querySelectorAll("#Desktopcont");
-let laptop = document.querySelectorAll("#Laptopscont");
+let laptops = document.querySelectorAll("#Laptopcont");
 let others = document.querySelectorAll("#Othercont");
 let tablet = document.querySelectorAll("#Tabletcont");
 
 const radall = document.querySelector("#all");
 const radmov = document.querySelector("#Mobile");
 const raddesk = document.querySelector("#Desktop");
-const radlaptop = document.querySelector("#Laptops");
+const radlaptop = document.querySelector("#Laptop");
 const radothers = document.querySelector("#Other");
 const radtablet = document.querySelector("#Tablet");
 
@@ -18,7 +18,7 @@ radall.addEventListener("click", () => {
   desk.forEach((pro) => {
     pro.removeAttribute("style");
   });
-  laptop.forEach((pro) => {
+  laptops.forEach((pro) => {
     pro.removeAttribute("style");
   });
   others.forEach((pro) => {
@@ -36,7 +36,7 @@ radmov.addEventListener("click", () => {
   desk.forEach((pro) => {
     pro.setAttribute("style", "display:none;");
   });
-  laptop.forEach((pro) => {
+  laptops.forEach((pro) => {
     pro.setAttribute("style", "display:none;");
   });
   others.forEach((pro) => {
@@ -53,7 +53,7 @@ raddesk.addEventListener("click", () => {
   desk.forEach((pro) => {
     pro.removeAttribute("style");
   });
-  laptop.forEach((pro) => {
+  laptops.forEach((pro) => {
     pro.setAttribute("style", "display:none;");
   });
   others.forEach((pro) => {
@@ -70,7 +70,7 @@ radlaptop.addEventListener("click", () => {
   desk.forEach((pro) => {
     pro.setAttribute("style", "display:none;");
   });
-  laptop.forEach((pro) => {
+  laptops.forEach((pro) => {
     pro.removeAttribute("style");
   });
   others.forEach((pro) => {
@@ -87,7 +87,7 @@ radothers.addEventListener("click", () => {
   desk.forEach((pro) => {
     pro.setAttribute("style", "display:none;");
   });
-  laptop.forEach((pro) => {
+  laptops.forEach((pro) => {
     pro.setAttribute("style", "display:none;");
   });
   others.forEach((pro) => {
@@ -104,7 +104,7 @@ radtablet.addEventListener("click", () => {
   desk.forEach((pro) => {
     pro.setAttribute("style", "display:none;");
   });
-  laptop.forEach((pro) => {
+  laptops.forEach((pro) => {
     pro.setAttribute("style", "display:none;");
   });
   others.forEach((pro) => {

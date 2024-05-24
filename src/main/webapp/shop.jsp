@@ -47,7 +47,7 @@ ArrayList<Product> pro = bd.allProduct();%>
             <h2>Categories</h2>
             <ul class="categories">
               <li><input style="display: none;" type="radio" name="catergory" id="all">
-              <label style="width: 100%; text-align: start; margin-left: 1rem;" for="all"> All</label></li>
+              <label style="width: 100%; text-align: start; margin-left: 1rem;" for="all">All</label></li>
             <%ArrayList<String> s = new ArrayList<String>();
     		
     		for(Product p : pro){%>
@@ -79,7 +79,7 @@ ArrayList<Product> pro = bd.allProduct();%>
                     <img class="imagenProducto" src="./assets/img/products/<%=p.getIdProduct() %>.png" alt="">
                     <p class="nombre"><%=p.getName() %></p>
                     <h3 class="precio"><%=p.getValue() %>$</h3>
-                    <p class="envio">Envio gratis</p>
+                    <p class="envio">Free Shipping</p>
                     <a href="./shop-single.jsp?codP=<%=p.getIdProduct() %>" style="width:100%"><button class="addCartButton">View product</button></a>
                 </div>
                 <%} %>
